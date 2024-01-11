@@ -1,0 +1,34 @@
+
+service: myservelessprojectchecking1
+
+frameworkVersion: "3"
+
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: serverlessUser1
+  iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - sns:SetSMSAttributes
+              - sns:Publish
+          Resource: '*'
+
+
+functions:
+    sendSMS:
+        handler: lambdas/endpoints/sendSMS.handler
+        events:
+            - http:
+                  path: send-sms
+                  method: POST
+                  cors: true
+
+
+
+
+
+
+
